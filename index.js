@@ -12,11 +12,11 @@ const DEF_MIN_TEMPERATURE = -100,
 module.exports = function (homebridge) {
    Service = homebridge.hap.Service;
    Characteristic = homebridge.hap.Characteristic;
-   homebridge.registerAccessory("homebridge-http-temperature", "HttpTemperature", HttpTemperature);
+   homebridge.registerAccessory("homebridge-http-flex-temperature", "HttpFlexTemperature", HttpFlexTemperature);
 }
 
 
-function HttpTemperature(log, config) {
+function HttpFlexTemperature(log, config) {
    this.log = log;
 
    this.url = config["url"];
@@ -45,7 +45,7 @@ function HttpTemperature(log, config) {
    this.waiting_response = false;
 }
 
-HttpTemperature.prototype = {
+HttpFlexTemperature.prototype = {
 
    updateState: function () {
       //Ensure previous call finished
@@ -142,7 +142,7 @@ HttpTemperature.prototype = {
       }
 
       return [this.informationService, this.temperatureService];
-   }
+   },
 
    getFromObject: function get (obj, path, def) {
     const fullPath = path
